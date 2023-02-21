@@ -1,0 +1,17 @@
+client:
+  container_name: example-client
+  image: example-client
+  restart: always
+  build:
+    context: .
+    dockerfile: ./${PATH}/Dockerfile.local
+    args:
+      - PNPM_VERSION=7.13.4
+      - SERVICE_PATH=${PATH}
+      - PACKAGE_NAME=${PACKAGE_NAME}
+  ports:
+    - 8888:8888
+  volumes:
+    - .:/usr/app/
+    - ./usr/app/node_modules
+    - ./usr/app/${PATH}/node_modules
